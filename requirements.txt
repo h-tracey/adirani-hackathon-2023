@@ -5,3 +5,6 @@ odfpy
 sqlalchemy==1.4.46
 mysqlclient
 ipykernel
+dependency-injector
+flask
+pyyaml
