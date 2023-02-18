@@ -58,16 +58,12 @@ if __name__  == '__main__':
         df_arr.append(complete_df)
         details_arr.append(file_details)
 
-
-
-
-    sql_con = get_engine()
-
-    for i, df in enumerate(df_arr):
-        print(details_arr[i]['name'])
-        try:
-            df.to_sql(details_arr[i]['name'], con=sql_con, if_exists='replace')
-        except OperationalError as err:
-            print(err)
-            continue
+    with get_engine() as sql_con:
+        for i, df in enumerate(df_arr):
+            print(details_arr[i]['name'])
+            try:
+                df.to_sql(details_arr[i]['name'], con=sql_con, if_exists='replace')
+            except OperationalError as err:
+                print(err)
+                continue
         
