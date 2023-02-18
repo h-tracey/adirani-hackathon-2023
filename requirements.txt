@@ -1,0 +1,7 @@
+pymysql
+pandas==1.3.5
+openpyxl
+odfpy
+sqlalchemy==1.4.46
+mysqlclient
+ipykernel
