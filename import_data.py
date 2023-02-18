@@ -21,6 +21,19 @@ def wrangle_dates(data_frame, details):
         delta = timedelta(days=day_row)
         return data_start + delta
 
+    if 'Product Revenue' in data_frame.columns:
+
+        data_frame['Product Revenue'] = data_frame['Product Revenue'] \
+        .str.replace('$', '') \
+        .str.replace(',', '') \
+        .astype(float)
+
+    if 'Avg. Price' in data_frame.columns:
+
+        data_frame['Avg. Price'] = data_frame['Avg. Price'] \
+        .str.replace('$', '') \
+        .str.replace(',', '') \
+        .astype(float)
 
     if 'by_day' in details['name']:
         if 'Nth day' in data_frame.columns:
