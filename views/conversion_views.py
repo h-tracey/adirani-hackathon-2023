@@ -141,3 +141,20 @@ class CoversionProductView(MethodView):
 
         raw = self.__analysis.conversions_by_product()
         return jsonify(dict(array=raw.to_dict('records')))
+
+class ConversionClassifer(MethodView):
+    def __init__(
+        self
+    ) -> None:
+        super().__init__() 
+        self.__analysis = AnalysisEngine(DataRepo(getenv('SQL_URL')))
+ 
+    def get(self):
+        self.__analysis.train_svm()
+        return 'success'
+
+    def post(self):
+        views_per_user = request.json.get("views_per_user")
+        page_type = request.json.get("page_type")
+        prediction = self.__analysis.post_svm(page_type, views_per_user)
+        return prediction

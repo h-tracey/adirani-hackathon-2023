@@ -10,7 +10,8 @@ from views.conversion_views import (
     CoversionCountView,
     CoversionMonthView,
     CoversionProductView,
-    CoversionWeekView
+    CoversionWeekView,
+    ConversionClassifer
 )
 from views.touchpoint_views import TouchpointsCountView
 from views.test_view import TestView
@@ -28,7 +29,6 @@ def create_app(container: Container) -> Flask:
     app = Flask("conversions_api")
     app.container = container
     
-    conversion_view = ConversionView.as_view(name="conversion_view")
     scatter_view = ScatterView.as_view(name='scatter_view')
     scatter_type_view = ScatterTypeView.as_view(name='scatter_type_view')
     box_rate_view = BoxRateView.as_view(name='box_rate_view')
@@ -39,6 +39,7 @@ def create_app(container: Container) -> Flask:
     conversion_month = CoversionMonthView.as_view(name ='conversion_month')
     conversion_prod = CoversionProductView.as_view(name ='conversion_prod')
     conversion_week = CoversionWeekView.as_view(name ='conversion_week')
+    conv_class = ConversionClassifer.as_view(name='conv_class')
     
     
     app.add_url_rule("/conversion/count", view_func=conversion_count_view, methods=["GET"])
@@ -51,6 +52,7 @@ def create_app(container: Container) -> Flask:
     app.add_url_rule("/box-views", view_func=box_rate_view, methods=["GET"])
     app.add_url_rule("/box-conversion", view_func=box_view_view, methods=["GET"])
     app.add_url_rule("/touchpoints", view_func=touchpont_count_view, methods=["GET"])
+    app.add_url_rule("/conversion/classify", view_func=conv_class, methods=["GET", "POST"])
     return  app
 
 container = Container()
