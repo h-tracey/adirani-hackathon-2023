@@ -2,3 +2,4 @@ data_clean/
 data_messy/
 __pycache__/
 *.env
+temp/

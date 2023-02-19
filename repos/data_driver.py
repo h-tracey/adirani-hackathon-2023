@@ -14,8 +14,11 @@ QUERY_MAP = {
     "prp_lang": "repos/sql_queries/proportion_by_language.sql",
     "tp_conv": "repos/sql_queries/number_of_touchpoints_per_conversion.sql",
     "chan_conv": "repos/sql_queries/total_conversions_per_channel.sql",
-    "prp_age": "repos/sql_queries/proportion_by_age.sql"}
-
+    "prp_age": "repos/sql_queries/proportion_by_age.sql",
+    'c_r_pm':  "repos/sql_queries/conversions_per_month.sql",
+    'c_r_pwd': "repos/sql_queries/conversions_per_weekday.sql",
+    'con_per_prod': "repos/sql_queries/conversions_per_product.sql"
+    }
 
 class DataRepo():
     def __init__(self, sql_url):
@@ -46,3 +49,15 @@ class DataRepo():
     @property
     def get_conversions_per_channel(self) -> pd.DataFrame:
         return self.__get_data('chan_conv')
+
+    @property
+    def get_conversions_per_weekday(self) -> pd.DataFrame:
+        return self.__get_data('c_r_pwd')
+
+    @property
+    def get_conversions_per_month(self) -> pd.DataFrame:
+        return self.__get_data('c_r_pm')
+
+    @property
+    def get_conversions_per_product(self) -> pd.DataFrame:
+        return self.__get_data('con_per_prod')
